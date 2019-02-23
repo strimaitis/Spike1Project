@@ -51,14 +51,13 @@ class DefaultScreen extends Component {
 	  	keys[0] = username.trim();
 	  	await AsyncStorage.getItem(keys[0]).then((value) => {
 	    	if (value.trim().localeCompare(password.trim()) == 0) {
-	    	/*
-	    		this.props.navigation.navigate('Profile', {
-	  				username: keys[0]
-	  			});
-	  			*/
-	    		this.props.navigation.navigate('Profile');
+	  			AsyncStorage.setItem('user', keys[0]);
+	  			this.props.navigation.navigate('Profile');
+	        } else {
+	        	alert("Incorrect password");
 	        }
-	    }).done();
+	    })
+	    .catch((error) => alert("Error: Invalid input")).done();
 	  }
 	  
 }
